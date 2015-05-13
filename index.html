@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ankgit by ankmathur96</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Ankgit</h1>
+      <h2 class="project-tagline">A version control system that mimics Git</h2>
+      <a href="https://github.com/ankmathur96/Ankgit/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ankmathur96/Ankgit/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="ankgit" class="anchor" href="#ankgit" aria-hidden="true"><span class="octicon octicon-link"></span></a>AnkGit</h1>
+
+<p>Fully functioning version control system with all of Git's local commands (remote coming soon!)</p>
+
+<h2>
+<a id="supported-commands" class="anchor" href="#supported-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported Commands</h2>
+
+<p><b>1. add </b></p>
+
+<p>Usage: <code>java AnkGit add [file name]</code></p>
+
+<p>Indicates you want the file to be included in the upcoming commit as having been changed. Same as staging the file If the file had been marked for removal, instead just unmark it</p>
+
+<p><b> 2. commit </b></p>
+
+<p>Usage: <code>java AnkGit commit [message]</code></p>
+
+<p>Saves a snapshot of certain files that can be viewed or restored at a later time. The files in a commit's snapshot come from two sources: files that were newly added to this commit (staged prior to the commit), and files that were inherited from the previous commit.</p>
+
+<p><b> 3. rm </b></p>
+
+<p>Usage: <code>java AnkGit rm [file name]</code></p>
+
+<p>Mark the file for removal; this means it will not be inherited as an old file in the next commit. If the file had been staged, instead unstage it.</p>
+
+<p><b> 4. log</b></p>
+
+<p>Usage: <code>java AnkGit log</code></p>
+
+<p>Starting at the current head pointer, display information about each commit backwards along the commit tree until the initial commit. For every node in this history, the information it should display is the commit id, the time the commit was made, and the commit message.</p>
+
+<p><b>5. global-log</b></p>
+
+<p>Usage: <code>java AnkGit global-log</code></p>
+
+<p>Like log, except displays information about all commits ever made.</p>
+
+<p><b> 6. status</b></p>
+
+<p>Usage: <code>java AnkGit status</code></p>
+
+<p>Displays what branches currently exist, and marks the current branch with a *. Also displays what files have been staged or marked for removal. </p>
+
+<p><b> 7. branch </b></p>
+
+<p>Usage: <code>java AnkGit branch [branch name]</code></p>
+
+<p>Creates a new branch with the given name. Note: Does NOT immediately switch to the newly created branch.</p>
+
+<p><b> 8. rm-branch </b></p>
+
+<p>Usage: <code>java AnkGit rm-branch [branch-name]</code></p>
+
+<p>Deletes the branch with the given name.</p>
+
+<p><b> 9. find </b></p>
+
+<p>Usage: <code>java AnkGit find [commit message]</code></p>
+
+<p>Prints out the id of the commit that has the given commit message. If there are multiple such commits, it prints the ids out on separate lines.</p>
+
+<p><b> 10. checkout </b></p>
+
+<p>Usage: <code>java AnkGit checkout [file name]</code> - Restores the given file in the working directory to its state at the commit at the head of the current branch.</p>
+
+<p><code>java AnkGit checkout [commit id] [file name]</code> - Restores the given file in the working directory to its state at the given commit.</p>
+
+<p><code>java AnkGit checkout [branch name]</code> - Restores all files in the working directory to their versions in the commit at the head of the given branch. Considers the given branch to now be the current branch.</p>
+
+<p><b> 11. merge </b></p>
+
+<p>Usage: <code>java AnkGit merge [branch name]</code></p>
+
+<p>Merges files from the head of the given branch into the head of the current branch. </p>
+
+<p><b> 12. reset </b></p>
+
+<p>Usage: <code>java AnkGit reset [commit id]</code></p>
+
+<p>Restores all files to their versions in the commit with the given id. Also moves the current branch's head to that commit node.</p>
+
+<p><b> 13. rebase </b></p>
+
+<p>Usage: <code>java AnkGit rebase [branch name]</code></p>
+
+<p>What rebase does is find the split point of the current branch and the given branch, then snaps off the current branch at this point and reattaches the current branch to the head of the given branch. </p>
+
+<p><b> 14. i-rebase </b></p>
+
+<p>Usage: <code>java AnkGit i-rebase [branch name]</code></p>
+
+<p>Same as normal rebasing, except interative. For each node it replays, it allows the user to change the commit’s message or skip replaying the commit. This means the command needs to pause and prompt the user for text input before continuing with each commit.</p>
+
+<h2>
+<a id="example-usage" class="anchor" href="#example-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Usage</h2>
+
+<p>(assuming all files have already been compiled, from the directory where the class files exist, these commands can be executed)</p>
+
+<div class="highlight highlight-bash"><pre>java AnkGit init
+
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>**information of critical importance**<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> <span class="pl-c1">test</span>.txt
+
+java AnkGit add <span class="pl-c1">test</span>.txt
+
+java AnkGit commit <span class="pl-s"><span class="pl-pds">"</span>initial commit<span class="pl-pds">"</span></span>
+
+rm <span class="pl-c1">test</span>.txt
+
+// oops, I didn<span class="pl-s"><span class="pl-pds">'</span>t want that!</span>
+<span class="pl-s"></span>
+<span class="pl-s">java AnkGit checkout 1 test.txt</span>
+<span class="pl-s"></span>
+<span class="pl-s">cat test.txt</span>
+<span class="pl-s"></span>
+<span class="pl-s">**information of critical importance**</span>
+<span class="pl-s"></span>
+<span class="pl-s">// phew.</span></pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ankmathur96/Ankgit">Ankgit</a> is maintained by <a href="https://github.com/ankmathur96">ankmathur96</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
